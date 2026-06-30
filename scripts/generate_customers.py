@@ -17,14 +17,19 @@ def generate_customer(customer_id):
 
     first_name = fake.first_name()
     email = fake.email()
+    duplicate_emails = []
 
-    # 2% customers without first name
     if random.random() < 0.02:
         first_name = None
 
-    # 2% customers without email
     if random.random() < 0.02:
         email = None
+
+    # 1% duplicate emails
+    elif duplicate_emails and random.random() < 0.01:
+        email = random.choice(duplicate_emails)
+    else:
+        duplicate_emails.append(email)
 
     return {
         "customer_id": customer_id,
