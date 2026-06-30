@@ -1,8 +1,13 @@
 from pathlib import Path
 from pyspark.sql import SparkSession
+import os
+import sys
+
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-INPUT_FILE=PROJECT_ROOT / "data" / "raw" / "customer.csv"
+INPUT_FILE=PROJECT_ROOT / "data" / "raw" / "customers.csv"
 
 spark=(SparkSession.builder.appName("Customer ETL").master("local[*]").getOrCreate())
 
