@@ -1,5 +1,6 @@
 from pathlib import Path
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 import os
 import sys
 
@@ -18,16 +19,22 @@ df = (
     .csv(str(INPUT_FILE))
 )
 
-print("=" * 60)
-print("Customer Dataset")
-print("=" * 60)
+valid_df= df.filter(
+    col("customer_id").isNotNull() &
+    col("first_name").isNotNull() &
+    col("email").isNotNull() 
+)
 
-df.show(10, truncate=False)
+invalid_df=df.filter(
+                    col("customer_id").isNull() | 
+                     col("first_name").isNull() |
+                     col("email").isNull()
+                     )
 
-print("=" * 60)
-print("Schema")
-print("=" * 60)
+print("=" * 50)
+print("valiad records",valid_df.count())
 
-df.printSchema()
+print("=" * 50)
+print("Invalid records",invalid_df.count())
 
 spark.stop()

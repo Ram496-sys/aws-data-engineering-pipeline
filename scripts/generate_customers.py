@@ -14,11 +14,23 @@ OUTPUT_PATH = PROJECT_ROOT / "data" / "raw" / "customers.csv"
 
 
 def generate_customer(customer_id):
+
+    first_name = fake.first_name()
+    email = fake.email()
+
+    # 2% customers without first name
+    if random.random() < 0.02:
+        first_name = None
+
+    # 2% customers without email
+    if random.random() < 0.02:
+        email = None
+
     return {
         "customer_id": customer_id,
-        "first_name": fake.first_name(),
+        "first_name": first_name,
         "last_name": fake.last_name(),
-        "email": fake.email(),
+        "email": email,
         "phone": fake.msisdn()[:10],
         "city": fake.city(),
         "state": fake.state(),
