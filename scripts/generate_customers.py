@@ -45,9 +45,16 @@ def generate_customer(customer_id):
 
 if __name__ == "__main__":
 
+    TOTAL_CUSTOMERS = 10
+
     customers = []
 
-    for customer_id in range(100001, 100001 + TOTAL_CUSTOMERS):
+    START_CUSTOMER_ID = 200001
+
+    for customer_id in range(
+        START_CUSTOMER_ID,
+        START_CUSTOMER_ID + TOTAL_CUSTOMERS
+    ):
         customers.append(generate_customer(customer_id))
 
     df = pd.DataFrame(customers)
