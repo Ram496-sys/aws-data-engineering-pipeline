@@ -70,7 +70,7 @@ Athena
 | SparkSession | GlueContext |
 | Local Files | S3 Storage |
 | CSV Output | S3 Output |
-| Local Execution | Glue Job |
+| Local Execution | Glue Job | 
 
 ---
 
